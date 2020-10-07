@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="product.info.addtocart">            
+            <block class="Iweb\Countdown\Block\Timer" name="countdown.timer" template="Iweb_Countdown::countdown_timer.phtml"/>
+        </referenceBlock>        
+        <referenceBlock name="product.info.addtocart.additional">
+            <block class="Iweb\Countdown\Block\Timer" name="countdown.timer.additional" template="Iweb_Countdown::countdown_timer.phtml"/>
+        </referenceBlock>
+    </body>
+</page>

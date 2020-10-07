@@ -1,0 +1,58 @@
+<?php /** @var \Iweb\Countdown\Block\Timer $block */ ?>
+<?php $releaseDate = $block->getReleaseDate(); ?>
+<?php if ($block->isModuleEnabled() && $releaseDate): ?>
+   <?php if (strtotime($releaseDate) > time()): ?>
+        <div class="timer-container">
+            <h4>Time left to Pre-Order:</h4>
+            <p id="timer">
+                <span id="timer-days">
+                    <strong><span class="remaining-time"></span></strong>
+                    <span class="label"> Day(s) </span>
+                </span>
+                <span id="timer-hours">
+                    <strong><span class="remaining-time"></span></strong>
+                    <span class="label"> Hour(s) </span>
+                </span>
+                <span id="timer-minutes">
+                    <strong><span class="remaining-time"></span></strong>
+                    <span class="label"> Minute(s) </span>
+                </span>
+                <span id="timer-seconds">
+                    <strong><span class="remaining-time"></span></strong>
+                    <span class="label"> Second(s)</span>
+                </span>
+            </p>
+            <script>
+                require([
+                    'jquery'
+                ], function ($) {
+                    let endDate = new Date('<?= date('Y-m-d H:i:s', strtotime($releaseDate)) ?>').getTime();
+                    let now = new Date().getTime();
+                    let remainingTime = endDate - now;
+
+                    let countdown = setInterval(function () {
+                        if (remainingTime >= 0) {
+                            let days  = Math.floor(remainingTime / (1000 * 60 * 60 * 24));
+                            let hours = Math.floor((remainingTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                            let mins  = Math.floor((remainingTime % (1000 * 60 * 60)) / (1000 * 60));
+                            let secs  = Math.floor((remainingTime % (1000 * 60)) / 1000);
+
+                            $('#timer-days .remaining-time').html(days);
+                            $('#timer-hours .remaining-time').html(('0' + hours).slice(-2));
+                            $('#timer-minutes .remaining-time').html(('0' + mins).slice(-2));
+                            $('#timer-seconds .remaining-time').html(('0' + secs).slice(-2));
+                            
+                            remainingTime -= 1000;
+                        } else {
+                            clearInterval(countdown);
+                            $('.timer-container').hide();
+                            $('#product-addtocart-button').html('Add to Cart');
+                        }
+                    }, 1000);
+                    
+                    $('#product-addtocart-button').html('Pre-Order');
+                });
+            </script>
+        </div>
+    <?php endif; ?>
+<?php endif; ?>

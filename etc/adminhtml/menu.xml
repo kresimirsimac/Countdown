@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Iweb_Countdown::countdown" title="Iweb Countdown" module="Iweb_Countdown" sortOrder="60" resource="Iweb_Countdown::countdown"/>
+        <add id="Iweb_Countdown::timer_configuration" title="Timer Configuration" module="Iweb_Countdown" sortOrder="50" parent="Iweb_Countdown::countdown" action="adminhtml/system_config/edit/section/countdowntimer" resource="Iweb_Countdown::timer_configuration"/>
+    </menu>
+</config>
